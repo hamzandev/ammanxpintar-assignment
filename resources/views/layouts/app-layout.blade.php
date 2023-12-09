@@ -25,7 +25,11 @@
         <!-- Navbar -->
         <div class="sticky-top">
             <x-header></x-header>
-            <x-menubar></x-menubar>
+            @auth
+                @if (Str::contains(Request::path(), 'user'))
+                    <x-menubar></x-menubar>
+                @endif
+            @endauth
         </div>
         <div class="page-wrapper">
             <!-- Page body -->
@@ -35,6 +39,24 @@
                 </div>
             </div>
             <x-footer></x-footer>
+        </div>
+    </div>
+    {{-- Logout modal --}}
+    <div class="modal modal-blur fade" id="modal-small" tabindex="-1" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="modal-title">Are you sure?</div>
+                    <div>If you proceed, you need to login again.</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link link-secondary me-auto"
+                        data-bs-dismiss="modal">Cancel</button>
+                    <a href="{{ route('auth.logout') }}" class="btn btn-danger">
+                        Logout Anyway
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
     <x-js-loader></x-js-loader>

@@ -1,30 +1,25 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CourseController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Backend\{AuthController, CourseController, DashboardController, NotificationController, ProfileController};
+use App\Http\Controllers\Frontend\CourseController as FrontendCourseController;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
 
 // Route redirects
 Route::name('redirects')->group(function () {
-    Route::redirect('/user', '/user/dashboard');
-    Route::redirect('/auth', '/auth/login');
+    Route::redirect('/dashboard', '/user/dashboard');
+    Route::redirect('/login', '/auth/login');
+});
+
+Route::get('/', function () {
+    return view('frontend.home');
+})->name('home');
+
+Route::prefix('/courses')
+    ->name('courses.')
+    ->controller(FrontendCourseController::class)
+    ->group(function(){
+        Route::get('/', 'index')->name('list');
+        Route::get('/{id}', 'show')->name('show')->middleware('auth');
 });
 
 Route::prefix('/auth')->name('auth.')->group(function () {
@@ -38,7 +33,18 @@ Route::prefix('/auth')->name('auth.')->group(function () {
 
 Route::prefix('/user')->middleware('auth')->name('user.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::prefix('courses')->group(function(){
-        Route::resource('courses', CourseController::class);
+
+    Route::controller(NotificationController::class)->prefix('notification')
+        ->name('notification.')
+        ->group(function(){
+            Route::get('/', 'index')->name('list');
+            Route::get('/{id}', 'show')->name('show');
     });
+
+    Route::prefix('/setting')->name('setting.')->group(function(){
+        Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+        Route::get('/notification', [ProfileController::class, 'index'])->name('notification');
+    });
+
+    Route::resource('courses', CourseController::class);
 });

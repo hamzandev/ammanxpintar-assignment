@@ -1,32 +1,43 @@
-{{-- <header class="navbar navbar-expand-md d-print-none"> --}}
+
+
 <header class="navbar navbar-expand-md sticky-top d-print-none" data-bs-theme="dark">
     <div class="container-xl">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu"
-            aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-        </button>
-        <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-building-broadcast-tower"
-                width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-                <path d="M16.616 13.924a5 5 0 1 0 -9.23 0" />
-                <path d="M20.307 15.469a9 9 0 1 0 -16.615 0" />
-                <path d="M9 21l3 -9l3 9" />
-                <path d="M10 19h4" />
-            </svg>
-            <span>Castify</span>
-        </h1>
+          </button>
+        <a href="/">
+            <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-building-broadcast-tower"
+                    width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+                    <path d="M16.616 13.924a5 5 0 1 0 -9.23 0" />
+                    <path d="M20.307 15.469a9 9 0 1 0 -16.615 0" />
+                    <path d="M9 21l3 -9l3 9" />
+                    <path d="M10 19h4" />
+                </svg>
+                <span>Castify</span>
+            </h1>
+        </a>
+        <div class="collapse navbar-collapse" id="navbar-menu">
+            <div class="navbar-nav">
+              <a class="nav-link" href="/">Home</a>
+              <a class="nav-link" href="{{ route('courses.list') }}">Courses</a>
+              <a class="nav-link disabled" href="#">Subscribe</a>
+            </div>
+          </div>
         <div class="navbar-nav flex-row order-md-last">
-            @auth
-                <div class="d-none d-md-flex">
-                    <x-theme-toggler></x-theme-toggler>
+            <div class="d-none d-md-flex">
+                <x-theme-toggler></x-theme-toggler>
+                @auth
                     <x-notification></x-notification>
-                </div>
+                @endauth
+            </div>
+            @auth
                 <x-account-dropdown></x-account-dropdown>
             @else
-                <span class="d-flex align-items-center">
+                <span class="d-flex align-items-center ms-3">
                     <a href="{{ route('auth.login') }}" class="btn btn-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-login-2" width="24"
                             height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
