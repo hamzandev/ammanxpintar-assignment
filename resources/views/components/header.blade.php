@@ -1,6 +1,6 @@
 
 
-<header class="navbar navbar-expand-md sticky-top d-print-none" data-bs-theme="dark">
+<header class="navbar navbar-expand-md sticky-top d-print-none border-none shadow-none">
     <div class="container-xl">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

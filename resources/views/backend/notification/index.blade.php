@@ -1,14 +1,14 @@
 <x-app-layout title="Notification">
     <div class="row justify-content-center">
-        <div class="col-8">
-            <div class="d-flex align-items-center justify-content-between">
+        <div class="col-md-8">
+            <div class="d-md-flex d-grid align-items-center justify-content-between mb-md-0 mb-5">
                 <div>
                     <h1>All Notification</h1>
                     <p class="text-secondary mb-4">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque quos quas enim!
                     </p>
                 </div>
-                <button class="btn btn-primary">
+                <button class="btn btn-outline-primary rounded-pill">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check" width="24"
                         height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                         stroke-linecap="round" stroke-linejoin="round">
@@ -28,7 +28,7 @@
                                         <span class="avatar">JL</span>
                                     </div>
                                     <div class="col">
-                                        <a href="{{ route('user.notification.show', $i+1) }}" class="text-truncate link" style="color: inherit;">
+                                        <a href="{{ route('user.notification.show', $i+1) }}" class="link" style="color: inherit;">
                                             <strong>Jeffie Lewzey</strong> commented on your <strong>"I'm not a
                                                 witch."</strong> post.
                                         </a>

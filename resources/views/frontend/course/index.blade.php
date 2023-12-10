@@ -55,7 +55,7 @@
                         </div>
 
                         <div class="d-flex laign-items-center gap-2 justify-content-end">
-                            <button class="btn btn-outline-primary rounded-pill">
+                            <button style="width: 50%" class="btn btn-outline-primary rounded-pill">
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                     class="icon icon-tabler icon-tabler-shopping-bag" width="24" height="24"
                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -67,7 +67,7 @@
                                 </svg>
                                 Cart
                             </button>
-                            <a href="{{ route('courses.show', $i+1) }}" class="btn btn-primary rounded-pill">
+                            <a style="width: 50%" href="{{ route('courses.show', $i+1) }}" class="btn block btn-primary rounded-pill">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-layout-list"
                                     width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                                     stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">

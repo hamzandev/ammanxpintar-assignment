@@ -1,6 +1,6 @@
 <x-app-layout title="Detail Notification">
     <div class="row">
-        <div class="col-8 mx-auto">
+        <div class="col-md-8 mx-auto">
             <div class="card">
                 <div class="card-header">
                     <a href="{{ route('user.notification.list') }}" class="btn btn-secondary">
