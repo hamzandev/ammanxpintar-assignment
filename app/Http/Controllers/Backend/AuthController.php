@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -47,7 +48,7 @@ class AuthController extends Controller
     {
         Auth::logout();
         Session::remove('user');
-        return redirect(route('auth.login'));
+        return redirect(route('home'));
     }
 
 }
