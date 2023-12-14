@@ -79,8 +79,8 @@
             - sesi
 
     - Relations :
-            1. Siswa -> Profil
-            2. Siswa -> Kelas
-            3. Ujian <-> Sesi
-            4. Ujian <-> Mapel
-            4. Ujian <-> Soal
+        1. Siswa -> Profil
+        2. Siswa -> Kelas
+        3. Ujian <-> Sesi
+        4. Ujian <-> Mapel
+        4. Ujian <-> Soal
