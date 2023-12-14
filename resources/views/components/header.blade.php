@@ -1,10 +1,9 @@
-
-
 <header class="navbar navbar-expand-md sticky-top d-print-none border-none shadow-none">
     <div class="container-xl">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-          </button>
+        </button>
         <a href="/">
             <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-building-broadcast-tower"
@@ -21,12 +20,18 @@
             </h1>
         </a>
         <div class="collapse navbar-collapse" id="navbar-menu">
-            <div class="navbar-nav">
-              <a class="nav-link" href="/">Home</a>
-              <a class="nav-link" href="{{ route('courses.list') }}">Courses</a>
-              <a class="nav-link disabled" href="#">Subscribe</a>
-            </div>
-          </div>
+            @guest
+                <div class="navbar-nav">
+                    @foreach ($menus as $menu)
+                        <a class="nav-link {{ $menu['link'] == Request::path() ? 'text-primary fw-bold' : '' }}"
+                            href="{{ $menu['link'] }}">{{ $menu['label'] }}</a>
+                    @endforeach
+                </div>
+            @else
+                <a class="nav-link"
+                    href="{{ route('user.dashboard') }}">Dashboard</a>
+            @endguest
+        </div>
         <div class="navbar-nav flex-row order-md-last">
             <div class="d-none d-md-flex">
                 <x-theme-toggler></x-theme-toggler>
