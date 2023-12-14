@@ -21,6 +21,20 @@ class Header extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.header');
+        $menus = [
+            [
+                'label' => 'Home',
+                'link' => '/',
+            ],
+            [
+                'label' => 'About',
+                'link' => 'about',
+            ],
+            [
+                'label' => 'Contact',
+                'link' => 'contact',
+            ],
+        ];
+        return view('components.header',compact('menus'));
     }
 }

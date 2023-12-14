@@ -16,6 +16,31 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
+    function register()  {
+        return view('auth.register');
+    }
+
+    function signup(Request $request) {
+        try {
+            $check = User::where('email', $request->email)->first();
+            if ($check) {
+                return redirect(route('auth.signup'))->with('error', 'That email has been registered. Try another one!');
+            }
+            // Auth::login($request->except('_token'));
+            return redirect(route('auth.activate-email', $request->email))->with('message', 'Your account has been registered but have\'nt actived yet. Check your email to acitvate your account.');
+        } catch (\Throwable $th) {
+            return redirect(route('auth.register'))->with('error', 'Something went wrong! Try again later.');
+            // return dd($th->getMessage());
+        }
+        return $request->all();
+    }
+
+
+    function activate($email) {
+        return view('auth.verify-email');
+    }
+
+
     function redirect($provider)
     {
         return Socialite::driver($provider)->redirect();

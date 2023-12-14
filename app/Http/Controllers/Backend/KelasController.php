@@ -5,14 +5,14 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class CourseController extends Controller
+class KelasController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('backend.courses.index');
+        return view('backend.kelas.index');
     }
 
     /**
@@ -20,7 +20,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.kelas.create');
     }
 
     /**
@@ -28,7 +28,10 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         // Store kelas here
+
+         return redirect(route('user.kelas.index'))
+         ->with('message', 'Kelas baru : ' . $request->kelas . ', berhasil ditambahkan!');
     }
 
     /**
