@@ -1,6 +1,6 @@
 <x-app-layout title="Register">
     <div class="row">
-        <form method="POST" action="{{ route('auth.signup') }}" class="col-md-6 mx-auto text-center">
+        <form action="{{ route('auth.signup') }}" method="POST" class="col-md-6 mx-auto text-center">
             @csrf
             <fieldset class="form-fieldset p-5">
                 <h1>Welcome to Castify!</h1>

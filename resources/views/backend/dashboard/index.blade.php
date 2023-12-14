@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout title="Dashboard">
     <div class="row g-3 align-items-center">
         <div class="col-auto">
             <span class="status-indicator status-green status-indicator-animated">
