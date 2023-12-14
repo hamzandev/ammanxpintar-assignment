@@ -8,6 +8,12 @@
 </p>
 
 ## Castify [Aplikasi Ujian Online]
+Light Mode
+![Dashboard Light](/public/assets/screenshot/dashboard-light.png)
+
+
+Dark Mode :
+![Dashboard Dark](/public/assets/screenshot/dashboard-dark.png)
 
 ### Tech Stack & Plugins :
 1. Core :
