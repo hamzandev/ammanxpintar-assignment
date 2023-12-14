@@ -7,27 +7,27 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## Castify (Aplikasi Ujian Online)
+## Castify [Aplikasi Ujian Online]
 
 ### Tech Stack & Plugins :
 1. Core :
-    - (Laravel)[https://laravel.com/docs/10.x]
-    - (Laravel Socialite)[https://laravel.com/docs/10.x/socialite#installation]
+    - [Laravel](https://laravel.com/docs/10.x)
+    - [Laravel Socialite](https://laravel.com/docs/10.x/socialite#installation)
 2. Third Party :
-    - (Laravel Spatie)[https://spatie.be/docs/laravel-permission/v6/installation-laravel]
+    - [Laravel Spatie](https://spatie.be/docs/laravel-permission/v6/installation-laravel)
 
 3. UI Framework & Templates
-    - (Bootstrap)[https://getbootstrap.com/docs/5.3/getting-started/introduction/]
-    - (JQuery)[https://jquery.com/download/]
-    - (Tabler)[https://tabler.io/docs/getting-started]
+    - [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
+    - [JQuery](https://jquery.com/download/)
+    - [Tabler](https://tabler.io/docs/getting-started)
 
 ### Feature :
 - Auth :
-    - Registrasi (dengan Email & Password, dengan Google)
-    - Login (dengan Email & Password, dengan Google)
+    - Registrasi [dengan Email & Password, dengan Google]
+    - Login [dengan Email & Password, dengan Google]
     - Logout
     - Role :
-        - Admin (Guru atau Staff) :
+        - Admin [Guru atau Staff] :
             - Login dengan Email & Password
             - CRUD Data Siswa, Mapel, Kelas, Ujian 
             - Laporan
@@ -37,8 +37,8 @@
 
 - Database :
     - Tables :
-        - User (Guru atau Staff)
-            - id (PK, AI)
+        - User [Guru atau Staff]
+            - id [PK, AI]
             - nama
             - email -> unique
             - password -> null
@@ -48,34 +48,34 @@
             - google_refresh_token -> null
 
         - Siswa
-            - id (PK, AI)
+            - id [PK, AI]
             - nisn -> unique
             - nama
-            - id_profil (FK)
+            - id_profil [FK]
         - Mapel
-            - id (PK, AI)
+            - id [PK, AI]
             - mapel -> uniqe
             - deskripsi -> null
         - Kelas
-            - id (PK, AI)
+            - id [PK, AI]
             - mapel -> uniqe
             - deskripsi -> null
         - Profil :
-            - id (PK, AI)
+            - id [PK, AI]
             - telepon
             - alamat
             - jenis_kelamin
             - umur
-            - id_kelas (FK)
+            - id_kelas [FK]
         - Ujian :
-            - id (PK, AI)
+            - id [PK, AI]
             - nama_ujian
             - tgl_ujian
-            - id_soal (FK)
-            - id_mapel (FK)
-            - id_sesi (FK)
+            - id_soal [FK]
+            - id_mapel [FK]
+            - id_sesi [FK]
         - Sesi :
-            - id (PK, AI)
+            - id [PK, AI]
             - sesi
 
     - Relations :
