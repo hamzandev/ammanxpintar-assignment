@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Backend\{AuthController,  DashboardController,  KelasController, MataPelajaranController, NotificationController, ProfileController, SiswaContrller};
+use App\Http\Controllers\Backend\{AuthController,  DashboardController,  KelasController, MataPelajaranController, NotificationController, ProfileController,  SiswaController};
 use Illuminate\Support\Facades\Route;
 
 // Route redirects
@@ -13,7 +13,7 @@ Route::get('/', function () {
     return view('frontend.home');
 })->name('home');
 
-Route::get('/about', fn() => view('frontend/about'));
+Route::get('/about', fn () => view('frontend/about'));
 
 Route::prefix('/auth')->name('auth.')->group(function () {
     Route::controller(AuthController::class)->group(function () {
@@ -32,17 +32,17 @@ Route::prefix('/user')->middleware('auth')->name('user.')->group(function () {
 
     Route::controller(NotificationController::class)->prefix('notification')
         ->name('notification.')
-        ->group(function(){
+        ->group(function () {
             Route::get('/', 'index')->name('list');
             Route::get('/{id}', 'show')->name('show');
-    });
+        });
 
-    Route::prefix('/setting')->name('setting.')->group(function(){
+    Route::prefix('/setting')->name('setting.')->group(function () {
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
         Route::get('/notification', [ProfileController::class, 'index'])->name('notification');
     });
 
     Route::resource('mapel', MataPelajaranController::class);
-    Route::resource('siswa', SiswaContrller::class);
+    Route::resource('siswa', SiswaController::class);
     Route::resource('kelas', KelasController::class);
 });
