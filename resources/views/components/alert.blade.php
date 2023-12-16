@@ -1,8 +1,13 @@
 <div class="mb-3">
-    <div class="alert alert-{{ $type }} alert-dismissible" role="alert">
+    <div class="alert alert-{{ $type ==  'error' ? 'danger' : $type }} alert-dismissible" role="alert">
         <div class="d-flex">
             <div>
                 @if ($type == 'success')
+                    @php
+                        toastify()->success($message, [
+                            'duration' => 7000,
+                        ]);
+                    @endphp
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon alert-icon" width="24" height="24"
                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -10,6 +15,11 @@
                         <path d="M5 12l5 5l10 -10"></path>
                     </svg>
                 @elseif($type == 'warning')
+                    @php
+                        toastify()->warning($message, [
+                            'duration' => 7000,
+                        ]);
+                    @endphp
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-alert-triangle"
                         width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
                         fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -20,6 +30,11 @@
                         <path d="M12 16h.01" />
                     </svg>
                 @elseif($type == 'info')
+                    @php
+                        toastify()->info($message, [
+                            'duration' => 7000,
+                        ]);
+                    @endphp
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-square-rounded"
                         width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
                         fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -29,6 +44,11 @@
                         <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
                     </svg>
                 @else
+                    @php
+                        toastify()->error($message, [
+                            'duration' => 7000,
+                        ]);
+                    @endphp
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="24"
                         height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                         stroke-linecap="round" stroke-linejoin="round">
@@ -38,7 +58,7 @@
                     </svg>
                 @endif
             </div>
-        <div class="ms-2">
+            <div class="ms-2">
                 {{ $message }}
             </div>
         </div>

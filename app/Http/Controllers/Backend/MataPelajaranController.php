@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\MataPelajaran;
 use Illuminate\Http\Request;
 
 class MataPelajaranController extends Controller
@@ -12,7 +13,11 @@ class MataPelajaranController extends Controller
      */
     public function index()
     {
-        return view('backend.mapel.index');
+        try {
+            $mapel = MataPelajaran::getAll();
+            return view('backend.mapel.index', compact('mapel'));
+        } catch (\Throwable $th) {
+        }
     }
 
     /**
@@ -28,10 +33,17 @@ class MataPelajaranController extends Controller
      */
     public function store(Request $request)
     {
-        // Store mapel here
-
-        return redirect(route('user.mapel.index'))
-                ->with('message', 'Mapel baru : ' . $request->mapel . ', berhasil ditambahkan!');
+        try {
+            $request->validate([
+                'nama' => 'required|min:3|unique:mata_pelajarans',
+            ]);
+            MataPelajaran::create($request->except('_token'));
+            return redirect(route('user.mapel.index'))
+                ->with('message', 'Mapel baru : ' . $request->post('nama') . ', berhasil ditambahkan!');
+        } catch (\Throwable $th) {
+            return redirect(route('user.mapel.index'))
+                ->with('error', 'Telah terjadi kesalahan. Silahkan coba lagi nanti!');
+        }
     }
 
     /**
@@ -39,23 +51,37 @@ class MataPelajaranController extends Controller
      */
     public function show(string $id)
     {
-        return view('backend.mapel.show', compact('id'));
+        $mapel = MataPelajaran::findOrFail($id);
+        return view('backend.mapel.show', compact('mapel'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        //
+
+        $request->validate([
+            'nama' => 'required|min:2'
+        ]);
+        try {
+            $cek = MataPelajaran::findOrFail($id);
+            if (!$cek) {
+                return redirect(route('user.mapel.index'))->with('error', 'Data mapel tidak ditemukan!');
+            }
+
+            if ($cek->nama != $request->post('nama')) {
+                $cekDuplikat = MataPelajaran::whereNama($request->post('nama'))->first();
+                if ($cekDuplikat) {
+                    return redirect(route('user.mapel.index'))
+                        ->with('error', 'Operasi gagal dilakukan. Mata pelajaran tersebut telah ada di sistem!');
+                }
+            }
+            $cek->update($request->except(['_token', '_method']));
+            return redirect(route('user.mapel.index'))
+                ->with('message', 'Data mapel ' . $request->post('nama') . ' berhasil diperbarui!');
+        } catch (\Throwable $th) {
+            return redirect(route('user.mapel.index'))
+                ->with('error', 'Telah terjadi kesalahan. Silahkan coba lagi nanti!');
+        }
     }
 
     /**
@@ -63,6 +89,13 @@ class MataPelajaranController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $mapel = MataPelajaran::findOrFail($id);
+        if (!$mapel) {
+            return redirect(route('user.mapel.index'))
+                ->with('error', 'Operasi gagal. Data mata pelajaran tidak ditemukan!');
+        }
+        $mapel->delete();
+        return redirect(route('user.mapel.index'))
+            ->with('message', 'Data mata pelajaran ' . $mapel->nama . ' berhasil dihapus!');
     }
 }

@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('mata_pelajarans', function (Blueprint $table) {
             $table->id();
+            $table->string('nama', 50);
+            $table->text('keterangan')->nullable();
             $table->timestamps();
         });
     }

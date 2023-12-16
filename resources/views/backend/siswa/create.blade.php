@@ -1,6 +1,6 @@
 <x-app-layout title="Tambah Siswa">
     <h2>Tambah Siswa</h2>
-    <form method="POST" action="{{ route('user.siswa.store') }}"  class="row">
+    <form method="POST" action="{{ route('user.siswa.store') }}" class="row">
         @csrf
         <div class="col-md-8">
             <div class="card">
@@ -20,33 +20,47 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label">Nomor Induk Siswa (NISN)</label>
-                                <input type="number" class="form-control" name="nisn"
+                                <input value="{{ old('nisn') }}" type="number"
+                                    class="form-control {{ $errors->has('nisn') ? 'is-invalid' : '' }}" name="nisn"
                                     placeholder="ex: 1298391823912">
+                                @if ($errors->has('nisn'))
+                                    <span class="invalid-feedback">{{ $errors->first('nisn') }}</span>
+                                @endif
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label">Nama Lengkap</label>
-                                <input type="text" class="form-control" name="name" placeholder="ex: John Doe">
+                                <input value="{{ old('nama') }}" type="text"
+                                    class="form-control {{ $errors->has('nama') ? 'is-invalid' : '' }}" name="nama"
+                                    placeholder="ex: John Doe">
+                                @if ($errors->has('nama'))
+                                    <span class="invalid-feedback">{{ $errors->first('nama') }}</span>
+                                @endif
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <div class="form-label">Kelas</div>
-                                <select class="form-select">
-                                    <option value="1">-- Select One --</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                <label class="form-label" for="kelas_id">Kelas</label>
+                                <select name="kelas_id"
+                                    class="form-select {{ $errors->has('kelas_id') ? 'is-invalid' : '' }}">
+                                    <option value="select">-- Select One --</option>
+                                    @foreach ($kelas as $k)
+                                        <option value="{{ $k->id }}">{{ $k->kelas }} ({{ $k->keterangan }})
+                                        </option>
+                                    @endforeach
                                 </select>
+                                @if ($errors->has('kelas_id'))
+                                    <span class="invalid-feedback">{{ $errors->first('kelas_id') }}</span>
+                                @endif
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        {{-- <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label">Tahun Ajaran</label>
                                 <input type="number" class="form-control" name="tahun-ajaran" placeholder="ex: 2018">
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="mb-3 d-flex justify-content-end">
                         <button type="submit" class="btn btn-primary">

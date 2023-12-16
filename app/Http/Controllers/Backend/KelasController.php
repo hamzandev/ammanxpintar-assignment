@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kelas;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class KelasController extends Controller
 {
@@ -12,7 +14,8 @@ class KelasController extends Controller
      */
     public function index()
     {
-        return view('backend.kelas.index');
+        $kelas = Kelas::paginate(10);
+        return view('backend.kelas.index', compact('kelas'));
     }
 
     /**
@@ -28,26 +31,32 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
-         // Store kelas here
+        $request->validate([
+            'kelas' => 'required|unique:kelas'
+        ]);
 
-         return redirect(route('user.kelas.index'))
-         ->with('message', 'Kelas baru : ' . $request->kelas . ', berhasil ditambahkan!');
+        try {
+            Kelas::create($request->except(['_token']));
+            return redirect(route('user.kelas.index'))
+                ->with('message', 'Kelas baru : ' . $request->kelas . ', berhasil ditambahkan!');
+        } catch (\Throwable $th) {
+            return redirect(route('user.kelas.index'))
+                ->with('error', 'Telah terjadi kesalahan. Silahkan coba lagi nanti!');
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(string $id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        try {
+            $kelas = Kelas::findOrFail($id);
+            if (!$kelas) {
+                return redirect(route('user.kelas.index'))->with('error', 'Data kelas tidak ditemukan!');
+            }
+            return view('backend.kelas.edit', compact('kelas'));
+        } catch (\Throwable $th) {
+            return redirect(route('user.siswa.index'))->with('error', "Telah terjadi kesalahan. Silahkan coba lagi nanti!");
+        }
     }
 
     /**
@@ -55,7 +64,32 @@ class KelasController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // return dd($request->all());
+        $accpetedKelas = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
+        $request->validate([
+            'kelas' => ['required', Rule::in($accpetedKelas)]
+        ]);
+
+        try {
+            $cek = Kelas::findOrFail($id);
+            if (!$cek) {
+                return redirect(route('user.kelas.index'))->with('error', 'Data kelas tidak ditemukan!');
+            }
+
+            if ($cek->kelas != $request->post('kelas')) {
+                $cekDuplikat = Kelas::whereKelas($request->post('kelas'))->first();
+                if ($cekDuplikat) {
+                    return redirect(route('user.kelas.index'))
+                        ->with('error', 'Operasi gagal dilakukan. Kelas tersebut telah ada di sistem!');
+                }
+            }
+            $cek->update($request->except(['_token', '_method']));
+            return redirect(route('user.kelas.index'))
+                ->with('message', 'Data kelas ' . $request->post('kelas') . ' berhasil diperbarui!');
+        } catch (\Throwable $th) {
+            return redirect(route('user.kelas.index'))
+                ->with('error', 'Telah terjadi kesalahan. Silahkan coba lagi nanti!');
+        }
     }
 
     /**
@@ -63,6 +97,13 @@ class KelasController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $kelas = Kelas::findOrFail($id);
+        if (!$kelas) {
+            return redirect(route('user.kelas.index'))
+                ->with('error', 'Operasi gagal. Data kelas tidak ditemukan!');
+        }
+        $kelas->delete();
+        return redirect(route('user.kelas.index'))
+            ->with('message', 'Data kelas ' . $kelas->kelas . ' berhasil dihapus!');
     }
 }
