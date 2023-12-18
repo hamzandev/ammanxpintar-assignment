@@ -11,7 +11,7 @@ class Profile extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nisn',
+        'user_id',
         'telepon',
         'jenis_kelamin',
         'umur',
@@ -30,9 +30,9 @@ class Profile extends Model
         return $this->hasOne(Kelas::class);
     }
 
-    public static function updateProfile($nisn, $data) {
+    public static function updateProfile($userId, $data) {
         return DB::table('profiles')
-            ->whereNisn($nisn)
+            ->whereUserId($userId)
             ->update($data);
     }
 }

@@ -9,7 +9,6 @@
 <script src="{{ asset('assets/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('assets/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('assets/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('assets/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
 <!-- Page specific script -->
 <script>
     $(function() {

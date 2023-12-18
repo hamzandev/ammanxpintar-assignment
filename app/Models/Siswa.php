@@ -12,33 +12,41 @@ class Siswa extends Model
 
     protected $fillable = [
         'nisn',
-        'nama',
+        'nama_lengkap',
         'kelas_id',
     ];
-
-    function profile() {
-        return $this->hasOne(Profile::class);
-    }
 
     function kelas() {
         return $this->hasOne(Kelas::class);
     }
 
+    function user() {
+        return $this->hasOne(User::class, 'email');
+    }
+
     public static function getAll() {
         return DB::table('siswas')
-            ->join('profiles', 'siswas.nisn', '=', 'profiles.nisn')
+            ->join('users', 'siswas.nisn', '=', 'users.email')
             ->join('kelas', 'siswas.kelas_id', '=', 'kelas.id')
-            ->select('siswas.*', 'profiles.*', 'kelas.kelas', 'kelas.keterangan')
-            ->get();
+            ->select('siswas.id as siswa_id','siswas.nama_lengkap', 'siswas.nisn',
+                    'siswas.kelas_id', 'siswas.id', 'kelas.kelas',
+                    'kelas.keterangan'
+            )->get();
     }
 
     public static function getOne($id) {
         return DB::table('siswas')
             ->where('siswas.id', $id)
-            ->join('profiles', 'siswas.nisn', '=', 'profiles.nisn')
+            ->join('users', 'siswas.nisn', '=', 'users.email')
+            ->join('profiles', 'users.id', '=', 'profiles.user_id')
             ->join('kelas', 'siswas.kelas_id', '=', 'kelas.id')
-            ->select('siswas.*', 'profiles.*', 'kelas.kelas', 'kelas.keterangan')
+            ->select('*')
             ->first();
+    }
+
+    public static function byNisn($nisn) {
+        $siswa = self::select(['nisn', 'password'])->from('siswas')->whereNisn($nisn)->first();
+        return $siswa;
     }
 
 

@@ -1,11 +1,11 @@
 <x-app-layout title="Tambah Siswa">
     <h2>Tambah Siswa</h2>
-    <form method="POST" action="{{ route('user.siswa.store') }}" class="row">
+    <form method="POST" action="{{ route('master-data.siswa.store') }}" class="row">
         @csrf
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{ route('user.siswa.index') }}" class="btn btn-outline-danger">
+                    <a href="{{ route('master-data.siswa.index') }}" class="btn btn-outline-danger">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left"
                             width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
                             fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -31,11 +31,11 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label">Nama Lengkap</label>
-                                <input value="{{ old('nama') }}" type="text"
-                                    class="form-control {{ $errors->has('nama') ? 'is-invalid' : '' }}" name="nama"
+                                <input value="{{ old('nama_lengkap') }}" type="text"
+                                    class="form-control {{ $errors->has('nama_lengkap') ? 'is-invalid' : '' }}" name="nama_lengkap"
                                     placeholder="ex: John Doe">
-                                @if ($errors->has('nama'))
-                                    <span class="invalid-feedback">{{ $errors->first('nama') }}</span>
+                                @if ($errors->has('nama_lengkap'))
+                                    <span class="invalid-feedback">{{ $errors->first('nama_lengkap') }}</span>
                                 @endif
                             </div>
                         </div>

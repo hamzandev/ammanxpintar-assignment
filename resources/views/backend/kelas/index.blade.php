@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-start">
                         <h1>Data Kelas</h1>
-                        <a href="{{ route('user.kelas.create') }}" class="btn btn-primary">
+                        <a href="{{ route('master-data.kelas.create') }}" class="btn btn-primary">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-plus"
                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
                                 fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -57,8 +57,8 @@
                                             {{ $k->keterangan }}
                                         </td>
                                         <td>
-                                            <x-actions-button editRoute="{{ route('user.kelas.show', $k->id) }}"
-                                                deleteRoute="{{ route('user.kelas.destroy', $k->id) }}" />
+                                            <x-actions-button editRoute="{{ route('master-data.kelas.show', $k->id) }}"
+                                                deleteRoute="{{ route('master-data.kelas.destroy', $k->id) }}" />
                                         </td>
                                     </tr>
                                 @endforeach

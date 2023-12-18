@@ -1,13 +1,14 @@
-<x-app-layout title="Detail Siswa - {{ $siswa->nama }} | Castify">
+<x-app-layout title="Detail Siswa - {{ $siswa->nama_lengkap }} | Castify">
 
-    <h2 class="text-center text-md-start">Profile Siswa</h2>
-    <form action="{{ route('user.siswa.update', $siswa->id) }}" method="POST" class="row">
+    <h2 class="text-center text-md-start">Detail Siswa <div class="badge bg-green text-white">{{ $siswa->nisn }}</div></h2>
+    <span>{{ $siswa->nisn }}</span>
+    <form action="{{ route('master-data.siswa.update', $siswa->nisn) }}" method="POST" class="row">
         @csrf
         @method('PUT')
         <div class="col-md-10">
             <div class="card">
                 <div class="card-body">
-                    <a href="{{ route('user.siswa.index') }}" class="btn btn-outline-primary">
+                    <a href="{{ route('master-data.siswa.index') }}" class="btn btn-outline-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left"
                             width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
                             fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -31,13 +32,13 @@
                     </div>
                     <div class="row g-3">
                         <div class="col-md-6">
-                            <label for="nama" class="form-label required">Nama Lengkap</label>
-                            <input type="text" name="nama"
-                                class="form-control {{ $errors->has('nama') ? 'is-invalid' : '' }}"
-                                value="{{ $siswa->nama }}">
+                            <label for="nama_lengkap" class="form-label required">Nama Lengkap</label>
+                            <input type="text" name="nama_lengkap"
+                                class="form-control {{ $errors->has('nama_lengkap') ? 'is-invalid' : '' }}"
+                                value="{{ $siswa->nama_lengkap }}">
                         </div>
                         <div class="col-md-6">
-                            <label for="nama" class="form-label required">NISN</label>
+                            <label for="nisn" class="form-label required">NISN</label>
                             <input type="text" name="nisn"
                                 class="form-control {{ $errors->has('nisn') ? 'is-invalid' : '' }}"
                                 value="{{ $siswa->nisn }}">
