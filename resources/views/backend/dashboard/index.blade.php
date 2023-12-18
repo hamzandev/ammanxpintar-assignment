@@ -1,4 +1,12 @@
 <x-app-layout title="Dashboard">
+    @if (Session::has('error'))
+        @php
+            toastify()->error(Session::get('error'), [
+                'duration' => 7000,
+            ]);
+        @endphp
+    @endif
+    {{ json_encode(auth()->user()) }}
     <div class="row g-3 align-items-center">
         <div class="col-auto">
             <span class="status-indicator status-green status-indicator-animated">

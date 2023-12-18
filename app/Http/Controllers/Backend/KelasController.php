@@ -37,10 +37,10 @@ class KelasController extends Controller
 
         try {
             Kelas::create($request->except(['_token']));
-            return redirect(route('user.kelas.index'))
+            return redirect(route('master-data.kelas.index'))
                 ->with('message', 'Kelas baru : ' . $request->kelas . ', berhasil ditambahkan!');
         } catch (\Throwable $th) {
-            return redirect(route('user.kelas.index'))
+            return redirect(route('master-data.kelas.index'))
                 ->with('error', 'Telah terjadi kesalahan. Silahkan coba lagi nanti!');
         }
     }
@@ -51,11 +51,11 @@ class KelasController extends Controller
         try {
             $kelas = Kelas::findOrFail($id);
             if (!$kelas) {
-                return redirect(route('user.kelas.index'))->with('error', 'Data kelas tidak ditemukan!');
+                return redirect(route('master-data.kelas.index'))->with('error', 'Data kelas tidak ditemukan!');
             }
             return view('backend.kelas.edit', compact('kelas'));
         } catch (\Throwable $th) {
-            return redirect(route('user.siswa.index'))->with('error', "Telah terjadi kesalahan. Silahkan coba lagi nanti!");
+            return redirect(route('master-data.siswa.index'))->with('error', "Telah terjadi kesalahan. Silahkan coba lagi nanti!");
         }
     }
 
@@ -73,21 +73,21 @@ class KelasController extends Controller
         try {
             $cek = Kelas::findOrFail($id);
             if (!$cek) {
-                return redirect(route('user.kelas.index'))->with('error', 'Data kelas tidak ditemukan!');
+                return redirect(route('master-data.kelas.index'))->with('error', 'Data kelas tidak ditemukan!');
             }
 
             if ($cek->kelas != $request->post('kelas')) {
                 $cekDuplikat = Kelas::whereKelas($request->post('kelas'))->first();
                 if ($cekDuplikat) {
-                    return redirect(route('user.kelas.index'))
+                    return redirect(route('master-data.kelas.index'))
                         ->with('error', 'Operasi gagal dilakukan. Kelas tersebut telah ada di sistem!');
                 }
             }
             $cek->update($request->except(['_token', '_method']));
-            return redirect(route('user.kelas.index'))
+            return redirect(route('master-data.kelas.index'))
                 ->with('message', 'Data kelas ' . $request->post('kelas') . ' berhasil diperbarui!');
         } catch (\Throwable $th) {
-            return redirect(route('user.kelas.index'))
+            return redirect(route('master-data.kelas.index'))
                 ->with('error', 'Telah terjadi kesalahan. Silahkan coba lagi nanti!');
         }
     }
@@ -99,11 +99,11 @@ class KelasController extends Controller
     {
         $kelas = Kelas::findOrFail($id);
         if (!$kelas) {
-            return redirect(route('user.kelas.index'))
+            return redirect(route('master-data.kelas.index'))
                 ->with('error', 'Operasi gagal. Data kelas tidak ditemukan!');
         }
         $kelas->delete();
-        return redirect(route('user.kelas.index'))
+        return redirect(route('master-data.kelas.index'))
             ->with('message', 'Data kelas ' . $kelas->kelas . ' berhasil dihapus!');
     }
 }

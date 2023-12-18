@@ -4,7 +4,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{ route('user.mapel.index') }}" class="btn btn-outline-danger">
+                    <a href="{{ route('master-data.mapel.index') }}" class="btn btn-outline-danger">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left"
                             width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
                             fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -14,14 +14,18 @@
                         Cancel
                     </a>
                 </div>
-                <form action="{{ route('user.mapel.store') }}" method="POST" class="card-body">
+                <form action="{{ route('master-data.mapel.store') }}" method="POST" class="card-body">
                     @csrf
                     <div class="mb-3">
-                        <label class="form-label">Mata Pelajaran</label>
+                        <label class="form-label required">Mata Pelajaran</label>
                         <input type="text" value="{{ old('nama') }}" class="form-control {{ $errors->has('nama') ? 'is-invalid' : '' }}" name="nama" placeholder="ex: Matematika">
                         @if ($errors->has('nama'))
                             <span class="invalid-feedback">{{ $errors->first('nama') }}</span>
                         @endif
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Keterangan</label>
+                        <textarea name="keterangan" id="keterangan" cols="30" rows="5" class="form-control"></textarea>
                     </div>
                     <div class="mb-3 d-flex justify-content-end">
                         <button type="submit" class="btn btn-primary">

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('profiles', function (Blueprint $table) {
-            $table->string('nisn')->primary();
+            $table->integer('user_id')->primary();
             $table->string('telepon', 12)->nullable();
             $table->enum('jenis_kelamin', ['L', 'P'])->nullable();
             $table->integer('umur')->nullable();

@@ -7,7 +7,7 @@
             @endif
             <div class="card">
                 <div class="card-header">
-                    <a href="{{ route('user.kelas.index') }}" class="btn btn-outline-danger">
+                    <a href="{{ route('master-data.kelas.index') }}" class="btn btn-outline-danger">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left"
                             width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
                             fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -17,7 +17,7 @@
                         Cancel
                     </a>
                 </div>
-                <form action="{{ route('user.kelas.update', $kelas->id) }}" method="POST" class="card-body">
+                <form action="{{ route('master-data.kelas.update', $kelas->id) }}" method="POST" class="card-body">
                     @csrf
                     @method('PUT')
                     <div class="mb-3">

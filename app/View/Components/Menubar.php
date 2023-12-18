@@ -21,6 +21,18 @@ class Menubar extends Component
      */
     public function render(): View|Closure|string
     {
+        // $menus = [
+        //     [
+        //         'type' => 'single',
+        //         'menus' => [
+        //             ['label']
+        //         ]
+        //     ],
+        //     [
+        //         'type' => 'nested',
+        //     ],
+        // ];
+
         return view('components.menubar');
     }
 }

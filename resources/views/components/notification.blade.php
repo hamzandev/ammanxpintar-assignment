@@ -14,7 +14,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-start">
                 <h3 class="card-title">Last updates</h3>
-                <a href="{{ route('user.notification.list') }}" class="link">See All</a>
+                <a href="{{ route('notification.list') }}" class="link">See All</a>
             </div>
             <div class="list-group list-group-flush list-group-hoverable">
                 @for ($i = 0; $i < 4; $i++)
@@ -23,7 +23,7 @@
                             <div class="col-auto"><span class="status-dot status-dot-animated bg-red d-block"></span>
                             </div>
                             <div class="col text-truncate">
-                                <a href="{{ route('user.notification.show', $i+1) }}" class="text-body d-block">Example {{ $i+1 }}</a>
+                                <a href="{{ route('notification.show', $i+1) }}" class="text-body d-block">Example {{ $i+1 }}</a>
                                 <div class="d-block text-secondary text-truncate mt-n1">
                                     Change deprecated html tags to text decoration classes (#29604)
                                 </div>

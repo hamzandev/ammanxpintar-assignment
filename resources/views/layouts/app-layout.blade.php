@@ -26,9 +26,7 @@
         <div class="sticky-top">
             <x-header></x-header>
             @auth
-                @if (Str::contains(Request::path(), 'user'))
-                    <x-menubar></x-menubar>
-                @endif
+                <x-menubar></x-menubar>
             @endauth
         </div>
         <div class="page-wrapper">
@@ -52,7 +50,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-link link-secondary me-auto"
                         data-bs-dismiss="modal">Cancel</button>
-                    <a href="{{ route('auth.logout') }}" class="btn btn-danger">
+                    <a href="{{ route('admin.logout') }}" class="btn btn-danger">
                         Logout Anyway
                     </a>
                 </div>

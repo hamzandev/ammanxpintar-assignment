@@ -8,7 +8,7 @@
             @endif
             <div class="d-flex justify-content-between align-items-start">
                 <h1>List Mata Pelajaran</h1>
-                <a href="{{ route('user.mapel.create') }}" class="btn btn-primary">
+                <a href="{{ route('master-data.mapel.create') }}" class="btn btn-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-plus"
                         width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
                         fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -46,8 +46,8 @@
                                         {{ $m->keterangan }}
                                     </td>
                                     <td>
-                                        <x-actions-button editRoute="{{ route('user.mapel.show', $m->id) }}"
-                                            deleteRoute="{{ route('user.mapel.destroy', $m->id) }}" />
+                                        <x-actions-button editRoute="{{ route('master-data.mapel.show', $m->id) }}"
+                                            deleteRoute="{{ route('master-data.mapel.destroy', $m->id) }}" />
                                     </td>
                                 </tr>
                             @endforeach

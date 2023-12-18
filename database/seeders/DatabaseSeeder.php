@@ -8,7 +8,9 @@ use App\Models\Kelas;
 use App\Models\MataPelajaran;
 use App\Models\Profile;
 use App\Models\Siswa;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -35,16 +37,54 @@ class DatabaseSeeder extends Seeder
 
         Siswa::factory()->create([
             'nisn' => '1234567890',
-            'nama' => 'Hamzan Wahyudi',
+            'nama_lengkap' => 'Hamzan Wahyudi',
             'kelas_id' => 1,
         ]);
 
+        User::factory()->create([
+            'credential_type' => 'email',
+            'name' => 'Hamzan',
+            'role' => 'admin',
+            'email' => 'admin@mail.com',
+            'password' => password_hash('admin123', PASSWORD_DEFAULT),
+        ]);
+
+        User::factory()->create([
+            'credential_type' => 'email',
+            'name' => 'Petugas',
+            'role' => 'petugas',
+            'email' => 'petugas@mail.com',
+            'password' => password_hash('123456', PASSWORD_DEFAULT),
+        ]);
+
+        User::factory()->create([
+            'credential_type' => 'nisn',
+            'name' => 'Siswa',
+            'role' => 'siswa',
+            'email' => '1234567890',
+            'password' => password_hash(1234567890, PASSWORD_DEFAULT),
+        ]);
+
         Profile::factory()->create([
-            'nisn' => '1234567890',
-            'alamat' => 'Jalan aja dulu jadiannya nanti',
+            'user_id' => '1',
             'telepon' => '083477126731',
             'jenis_kelamin' => 'L',
             'umur' => 19,
+            'alamat' => 'Jalan aja dulu jadiannya nanti',
+        ]);
+        Profile::factory()->create([
+            'user_id' => '2',
+            'telepon' => '083157263712',
+            'jenis_kelamin' => 'P',
+            'umur' => 32,
+            'alamat' => 'Jalan aja dulu jadiannya nanti',
+        ]);
+        Profile::factory()->create([
+            'user_id' => '3',
+            'telepon' => '083477126876',
+            'jenis_kelamin' => 'L',
+            'umur' => 23,
+            'alamat' => 'Jalan aja dulu jadiannya nanti',
         ]);
     }
 }
